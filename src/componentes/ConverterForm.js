@@ -1,10 +1,22 @@
-import React, { use, useState } from "react";
+import React, { useState , useEffect} from "react";
+import { getCurrencies, getEntreFechas, getLatest,getTasaEnFecha } from "../servicio/FrankfurterService";
 const ConverterForm = () =>{
     const [amount,setAmount] = useState('');
     const [monedaOrigen, setMonedaOrigen] = useState('');
     const [monedaDestino, setMonedaDestino] = useState('');
     const [date, setDate] = useState('');
-
+    const [monedas, setMonedas] = useState({});
+    useEffect( () =>{ 
+        async function fetchCurrencies() {
+            try{
+                const data = await getCurrencies();
+                setMonedas(data);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        fetchCurrencies();
+    },[]); 
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log('convertir: ',{amount,monedaOrigen,monedaDestino,date});   
@@ -27,7 +39,12 @@ const ConverterForm = () =>{
                     Moneda de origen:
                 </label>
                 <select value={monedaOrigen} onChange={(e) => setMonedaOrigen(e.target.value)} required> 
-                    <option value=''> Seleccione </option>         
+                    <option value=''> Seleccione </option>
+                    {Object.entries(monedas).map(([code, name]) => (
+                        <option key={code} value={code}>
+                        {code} - {name}
+                        </option>
+                    ))}         
                 </select>
             </div>
             <div>
