@@ -52,7 +52,12 @@ const ConverterForm = () =>{
                     Moneda de destino:
                 </label>
                 <select value={monedaDestino} onChange={(e) => setMonedaDestino(e.target.value)} required> 
-                    <option value=''> Seleccione </option>         
+                    <option value=''> Seleccione </option>
+                    {Object.entries(monedas).map(([code, name]) => (
+                        <option key={code} value={code}>
+                        {code} - {name}
+                        </option> 
+                    ))}        
                 </select>
             </div>
             <div>
