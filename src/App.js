@@ -3,6 +3,7 @@ import './App.css';
 import Header from './componentes/Header';
 import Sidebar from './componentes/Sidebar';
 import ConverterForm from './componentes/ConverterForm';
+import UltimaCotizacion from './componentes/UltimaCotizacion';
 function App() {
   return (
     <div className='APP_container'>
@@ -14,6 +15,8 @@ function App() {
           </div>
           <main>
             <ConverterForm/>
+            <br></br>
+            <UltimaCotizacion/>
           </main>
       </div>
     </div>

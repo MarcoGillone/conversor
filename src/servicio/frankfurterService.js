@@ -19,13 +19,13 @@ export async function getTasaEnFecha(date, from, to) {
     return await response.json();
 }
 
-export async function getLatest(from, to) {
-    const response = await fetch(`${Base_URL}/latest?from=${from}&to=${to}`);
-    if (!response.ok) {
-        throw new Error("Error al obtener la tasa de cambio");
-        
-    }
-    return await response.json();
+export async function getLatest(from = 'EUR') {
+  const url = `https://api.frankfurter.app/latest?from=${from}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Error al obtener la tasa de cambio');
+  }
+  return await response.json();
 }
 
 export async function getEntreFechas(fromDate, toDate, fromMoneda, toMoneda) {
