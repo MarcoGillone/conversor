@@ -34,7 +34,7 @@ const ConverterForm = () => {
       if (date) {
         data = await getTasaEnFecha(date, monedaOrigen, monedaDestino);
       } else {
-        data = await getLatest(monedaOrigen, monedaDestino);
+        data = await getTasaEnFecha("latest", monedaOrigen, monedaDestino);
       }
       let tasa = data.rates[monedaDestino];
       const resultadoB = parseFloat(amount) * tasa;
