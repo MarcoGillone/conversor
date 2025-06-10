@@ -4,6 +4,7 @@ import Header from './componentes/Header';
 import Sidebar from './componentes/Sidebar';
 import ConverterForm from './componentes/ConverterForm';
 import UltimaCotizacion from './componentes/UltimaCotizacion';
+import TopRates from './componentes/TopRates';
 
 
 
@@ -20,6 +21,8 @@ function App() {
             <ConverterForm/>
             <br></br>
             <UltimaCotizacion/>
+            <br></br>
+            <TopRates/>
           </main>
       </div>
     </div>

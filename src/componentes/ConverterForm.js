@@ -38,11 +38,17 @@ const ConverterForm = () => {
       }
       let tasa = data.rates[monedaDestino];
       const resultadoB = parseFloat(amount) * tasa;
+      setResultado(null);
+      
+      setTimeout(() =>{
       setResultado({
         tasa,
         resultadoB,
         fecha: data.date,
       });
+    },0);
+
+
       
     } catch (error) {
       console.error("Error al convertir", error);
