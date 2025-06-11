@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCurrencies, getTasaEnFecha } from "../servicio/FrankfurterService";
+import { getCurrencies, getNcotizacion } from "../servicio/FrankfurterService";
 
 const TopRates = () => {
   const [fecha, setFecha] = useState("");
@@ -10,7 +10,7 @@ const TopRates = () => {
 
   const consultarTop = async () => {
     try {
-      const data = await getTasaEnFecha(fecha, monedaOrigen);
+      const data = await getNcotizacion(fecha, monedaOrigen);
       const tasas = [];
       for(const code in data.rates){
         tasas.push([code, data.rates[code]])

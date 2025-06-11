@@ -19,6 +19,15 @@ export async function getTasaEnFecha(date, from, to) {
     return await response.json();
 }
 
+export async function getNcotizacion(date, from) {
+    const response = await fetch(`${Base_URL}/${date}?from=${from}`);
+    if (!response.ok) {
+        throw new Error("Error al obtener la tasa de cambio");
+        
+    }
+    return await response.json();
+}
+
 export async function getLatest(from = 'EUR') {
   const url = `https://api.frankfurter.app/latest?from=${from}`;
   const response = await fetch(url);
