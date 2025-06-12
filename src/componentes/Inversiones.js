@@ -26,9 +26,14 @@ const Inversiones = () => {
 
     const analizarInversion = async () =>{
         if(!monedaComparacion || !monedaOrigen || !fechaFin || !fechaInicio){return;}
-    
+        if (fechaInicio > fechaFin) {
+            setResultado('La fecha final debe ser posteriror a la de inicio')
+            return;
+        }
     try{
+
         const data = await getEntreFechas(fechaInicio, fechaFin, monedaOrigen, monedaComparacion);
+
         const tasas = data.rates
         const tasaInicio = tasas[fechaInicio]?.[monedaComparacion];
         const tasaFin = tasas[fechaFin]?.[monedaComparacion];
@@ -44,11 +49,24 @@ const Inversiones = () => {
         }else{
             mensaje = 'La inversion se mantuvo igual'
         }
+
+
+
+        if (tasaInicio === undefined || tasaFin === undefined) {
+            setResultado('no se encontraron tasas para una de las fechas')
+            return;
+        }else{
+        setResultado(null)
+        setTimeout(() =>{
         setResultado(
       `Tasa inicio: ${tasaInicio} - Tasa fin: ${tasaFin}\n` +
-      `Valor inicial: ${cantidadInicial.toFixed(2)} - Valor final: ${cantidadFinal.toFixed(2)}\n` +
-      mensaje
-      );
+      `Valor de compra: ${cantidadInicial.toFixed(2)} - Valor de venta: ${cantidadFinal.toFixed(2)}\n` +
+      mensaje);
+            
+            
+            },0);
+    }
+
     }catch (error){
         console.error('error al manejar la url', error);
         setResultado(null);

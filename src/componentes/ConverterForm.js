@@ -63,10 +63,11 @@ const ConverterForm = () => {
 
   return (
     <>
+    <div className="card p-4 shadow-sm">
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Monto:</label>
-          <input
+        <div className="mb-3">
+          <label className="form-label">Monto:</label>
+          <input className="form-control"
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -74,9 +75,9 @@ const ConverterForm = () => {
           />
         </div>
 
-        <div>
-          <label>Moneda de origen:</label>
-          <select
+        <div className="mb-3">
+          <label className="form-label">Moneda de origen:</label>
+          <select className="form-select"
             value={monedaOrigen}
             onChange={(e) => setMonedaOrigen(e.target.value)}
             required
@@ -99,9 +100,9 @@ const ConverterForm = () => {
           </select>
         </div>
 
-        <div>
-          <label>Moneda de destino:</label>
-          <select
+        <div className="mb-3">
+          <label className="form-label">Moneda de destino:</label>
+          <select className="form-select"
             value={monedaDestino}
             onChange={(e) => setMonedaDestino(e.target.value)}
             required
@@ -124,9 +125,9 @@ const ConverterForm = () => {
           </select>
         </div>
 
-        <div>
-          <label>Fecha:</label>
-          <input
+        <div className="mb-3">
+          <label className="form-label">Fecha:</label>
+          <input className="form-control"
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
@@ -134,24 +135,26 @@ const ConverterForm = () => {
           />
         </div>
 
-        <div>
-          <button type="submit">Convertir</button>
-          <button type="button" onClick={handleSwap}>
+        <div className="mb-3 d-flex gap-2">
+          <button className="btn btn-primary" type="submit">Convertir</button>
+          <button className="btn btn-secondary" type="button" onClick={handleSwap}>
             Intercambiar monedas
           </button>
         </div>
       </form>
 
       {resultado && (
-        <div>
+        <div className="mb-3 alert alert-info mt-4">
           <h3>Resultado:</h3>
           <p>Fecha: {resultado.fecha}</p>
           <p>Tasa de cambio: {resultado.tasa}</p>
           <p>Monto: {resultado.resultadoB.toFixed(2)}</p>
         </div>
       )}
+      </div>
     </>
   );
+  
 };
 
 export default ConverterForm;

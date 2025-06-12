@@ -13,14 +13,14 @@ import Inversiones from './componentes/Inversiones';
 function App() {
   const [vistaActual,setVistaActual] = useState('');
   return (
-    <div className='APP_container'>
+    <div className='APP_container container-fluid'>
       <Header/>
-      <div className='main_cont'>
+      <div className='main_cont d-flex'>
         <Sidebar onSelect={setVistaActual}/>
           <div className='content_area'>
             {
               vistaActual === 'convert' && (
-            <main>
+            <main className='flex-grow-1 p-4'>
             <ConverterForm/>
             <br></br>
             <UltimaCotizacion/>
@@ -32,7 +32,7 @@ function App() {
 
             {
               vistaActual === 'listCotizar' &&(
-                <main>
+                <main className='flex-grow-1 p-4'>
                   <TopRates/>
                 </main>
 
@@ -41,7 +41,7 @@ function App() {
 
             {
               vistaActual === 'analysis' &&(
-                <main>
+                <main className='flex-grow-1 p-4'>
                   <Inversiones/>
                 </main>
 
@@ -52,7 +52,7 @@ function App() {
             {
               !vistaActual &&(
                 
-                  <p>Seleccionar una opcion desde el menu lateral</p>
+                  <p className='p-4'>Seleccionar una opcion desde el menu lateral</p>
                 
 
               )
