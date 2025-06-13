@@ -73,11 +73,36 @@ const Inversiones = () => {
     }
     };
     return (
-        <div>
-            <h3>Analizis de inversion</h3>
-            <label>
-        Moneda origen:
-        <select value={monedaOrigen} onChange={(e) => setMonedaOrigen(e.target.value)}>
+        <div className="card p-4 shadow-sm mt-5">
+            <h3 className="fw-bold">Analizis de inversion</h3>
+        <div className="mb-3">
+                <label className="form-label">Moneda de origen:</label>
+                <select className="form-select"
+                  value={monedaOrigen}
+                  onChange={(e) => setMonedaOrigen(e.target.value)}
+                  required
+                >
+                  <option value="">Seleccione</option>
+                  {
+                    (() => {
+                      const options = [];
+                      for (const code in monedas) {
+                        const name = monedas[code];
+                        options.push(
+                          <option key={code} value={code}>
+                            {code} - {name}
+                          </option>
+                        );
+                      }
+                      return options;
+                    })()
+                  }
+                </select>
+              </div>
+
+        <div className="mb-3">
+        <label className="form-label"> Moneda a comparar: </label>
+        <select className="form-select" value={monedaComparacion} onChange={(e) => setMonedaComparacion(e.target.value)}>
                     <option value=''> Seleccione </option>
                     {
                         (() => {
@@ -94,54 +119,35 @@ const Inversiones = () => {
                         })()
                     }
                 </select>
-            </label>
-
-
-        <label>
-        Moneda a comparar:
-        <select value={monedaComparacion} onChange={(e) => setMonedaComparacion(e.target.value)}>
-                    <option value=''> Seleccione </option>
-                    {
-                        (() => {
-                            const options = [];
-                            for (const code in monedas) {
-                            const name = monedas[code];
-                            options.push(
-                                <option key={code} value={code}>
-                                {code} - {name}
-                                </option>
-                            );
-                            }
-                            return options;
-                        })()
-                    }
-                </select>
-        </label>
-        <br></br>
         
-        <label>Fecha Inicio:
-        <input type="date" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} required />
+        </div>
+        <br></br>
+        <div className="mb-3">
+        <label className="form-label">Fecha Inicio:
+        <input className="form-control" type="date" value={fechaInicio} onChange={(e) => setFechaInicio(e.target.value)} required />
         </label>
+        </div>
 
-
-        <label>Fecha Fin:
-        <input type="date" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} required />
+        <div className="mb-3">
+        <label className="form-label">Fecha Fin:
+        <input className="form-control" type="date" value={fechaFin} onChange={(e) => setFechaFin(e.target.value)} required />
         </label>
-
+        </div>
 
         <br></br>
-
-        <button onClick={analizarInversion}>
+        <div className="mb-3">
+        <button className="btn btn-primary"  onClick={analizarInversion}>
             Analizar
         </button>
+        </div>
 
         {
             resultado && (
-             <div>
+             <div className="alert alert-info white-space-pre-line">
                 <strong>
                     Resultado:
                 </strong>
-                <p>{resultado}</p>
+                <p className="mb-1 fw-bold">{resultado}</p>
              </div>   
             )
         }

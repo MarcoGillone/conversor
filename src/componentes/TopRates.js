@@ -52,46 +52,57 @@ const TopRates = () => {
 },[]);
 
   return (
-    <div>
-      <h3>Top Cotizaciones</h3>
+    <div className="card p-4 shadow-sm mt-5">
+      <h3 className="text-center mb-4">Top Cotizaciones</h3>
 
-      <label>
-        Moneda origen:
-        <select value={monedaOrigen} onChange={(e) => setMonedaOrigen(e.target.value)}>
-                    <option value=''> Seleccione </option>
-                    {
-                        (() => {
-                            const options = [];
-                            for (const code in monedas) {
-                            const name = monedas[code];
-                            options.push(
-                                <option key={code} value={code}>
-                                {code} - {name}
-                                </option>
-                            );
-                            }
-                            return options;
-                        })()
-                    }
+      <div className="mb-3">
+                <label className="form-label">Moneda de origen:</label>
+                <select className="form-select"
+                  value={monedaOrigen}
+                  onChange={(e) => setMonedaOrigen(e.target.value)}
+                  required
+                >
+                  <option value="">Seleccione</option>
+                  {
+                    (() => {
+                      const options = [];
+                      for (const code in monedas) {
+                        const name = monedas[code];
+                        options.push(
+                          <option key={code} value={code}>
+                            {code} - {name}
+                          </option>
+                        );
+                      }
+                      return options;
+                    })()
+                  }
                 </select>
+              </div>
+      <label className="form-label"> Cantidad de tasas a mostrar
+        <input className="form-control" type="numer" value={n} onChange={(e)=> setN(Number(e.target.value))} min='1'></input>
       </label>
 
-      <label> Cantidad de tasas a mostrar
-        <input type="numer" value={n} onChange={(e)=> setN(Number(e.target.value))} min='1'></input>
-      </label>
-
-      <label>Fecha:
-        <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
-      </label>
-
-      <button onClick={consultarTop}>Consultar</button>
-      <ul>
+        <div className="mb-3">
+          <label className="form-label">Fecha:</label>
+          <input className="form-control"
+            type="date"
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
+            required
+          />
+        </div>
+      <div className="d-flex justify-content-start mb-4">
+      <button className="btn btn-primary" onClick={consultarTop}>Consultar</button>
+      </div>
+      <h5 className="fw-bold">Top {n} Tasas mas altas para 1 {monedaOrigen}: </h5>
+      <ul className="list-group">
         { 
         (()=>{
           const items = [];
           for(const [code, rates] of topTasas){
             items.push(
-              <li key={code}>
+              <li className="list-group-item" key={code}>
                 1 {monedaOrigen} = {rates} {code}
               </li>
             );

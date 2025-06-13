@@ -29,32 +29,35 @@ const UltimaCotizacion = () =>{
         fetchMonedas();
     },[]);
     return (
-        <div>
-            <h2>Ultima Cotizacion</h2>
-            <label>
-                Moneda base: 
-                <select value={monedaOrigen} onChange={(e) => setMonedaOrigen(e.target.value)} required>
-                    <option value=''> Seleccione </option>
-                    {
-                        (() => {
-                            const options = [];
-                            for (const code in monedas) {
-                            const name = monedas[code];
-                            options.push(
-                                <option key={code} value={code}>
-                                {code} - {name}
-                                </option>
-                            );
-                            }
-                            return options;
-                        })()
-                    }
-                </select>
-                
-            </label>
-            <button onClick={handleGetLatest}> Conzultar </button>
+        <div className="card p-4 shadow-sm mt-5">
+            <h2 className="mb-4">Ultima Cotizacion</h2>
+        <div className="mb-3">
+          <label className="form-label">Moneda de origen:</label>
+          <select className="form-select"
+            value={monedaOrigen}
+            onChange={(e) => setMonedaOrigen(e.target.value)}
+            required
+          >
+            <option value="">Seleccione</option>
+            {
+              (() => {
+                const options = [];
+                for (const code in monedas) {
+                  const name = monedas[code];
+                  options.push(
+                    <option key={code} value={code}>
+                      {code} - {name}
+                    </option>
+                  );
+                }
+                return options;
+              })()
+            }
+          </select>
+        </div>
+            <button className="btn btn-primary mb-4" onClick={handleGetLatest}> Conzultar </button>
             {tasa && (
-                <div> 
+                <div className="mb-3"> 
                     <p>Fecha:{fecha}</p>
                         <ul>
                         {
